@@ -8,6 +8,7 @@ class AnswerstateCubit extends Cubit<AnswerstateState> {
   AnswerstateCubit() : super(AnswerstateInitial());
   int score = 0;
   int currentque = 0;
+  bool isdone=false;
   List<questionmodel> qlist = [
     questionmodel(
       question: 'question one',
@@ -46,4 +47,11 @@ class AnswerstateCubit extends Cubit<AnswerstateState> {
     currentque++;
     emit(Answerstatefalse());
   }
+  bool isdoneop(){
+    if(qlist.length==currentque){
+     return isdone=true;
+    }
+    return isdone=false;
+  }
 }
+

@@ -34,15 +34,17 @@ class ButtonListView extends StatelessWidget {
                   buttonColor: color!,
                   onPressed: () async{
                     if (choiceValue == true) {
-                        color = Colors.green;
+                      
                         
-                          await Future.delayed(const Duration(seconds: 5));
+                          await Future.delayed(const Duration(seconds: 2));
                       BlocProvider.of<AnswerstateCubit>(context).trueanswer();
+                      BlocProvider.of<AnswerstateCubit>(context).isdoneop();
                     
                     } else {
-                       color = Colors.red;
-                          await Future.delayed(const Duration(seconds: 5));
+                
+                          await Future.delayed(const Duration(seconds: 2));
                       BlocProvider.of<AnswerstateCubit>(context).falseanswer();
+                       BlocProvider.of<AnswerstateCubit>(context).isdoneop();
                      
                     }
                   },

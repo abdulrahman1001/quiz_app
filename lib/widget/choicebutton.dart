@@ -21,12 +21,18 @@ class _choicebuttonState extends State<choicebutton> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
+      onPressed: () async{
         ispress=true;
         setState(() {
           
         });
+        
         widget.onPressed();
+           await Future.delayed(const Duration(seconds: 2));
+         ispress=false;
+        setState(() {
+          
+        });
         
        
       },

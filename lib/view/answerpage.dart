@@ -13,11 +13,13 @@ class AnswerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AnswerstateCubit, AnswerstateState>(
       builder: (context, state) {
+        bool isdone=BlocProvider.of<AnswerstateCubit>(context).isdone;
         return Scaffold(
             appBar: AppBar(
               title: Text('quiz app'),
             ),
-            body: Column(
+            body:  isdone==true?Center(child: Text('your score is ${BlocProvider.of<AnswerstateCubit>(context).score}'),):
+             Column(
               children: [
                 scoreandquesnumber(),
                
@@ -27,7 +29,7 @@ class AnswerPage extends StatelessWidget {
                   indent: 10,
                   endIndent: 10,
                 ),
-              
+            
                 ButtonListView(),
                 
               ],
@@ -36,3 +38,4 @@ class AnswerPage extends StatelessWidget {
     );
   }
 }
+
