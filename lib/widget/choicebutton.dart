@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_app/cubit/cubit/answerstate_cubit.dart';
 
 class choicebutton extends StatefulWidget {
   const choicebutton(
@@ -17,35 +19,22 @@ class choicebutton extends StatefulWidget {
 }
 
 class _choicebuttonState extends State<choicebutton> {
-  bool ispress=false;
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () async{
-        ispress=true;
-        setState(() {
-          
-        });
-        
-        widget.onPressed();
-           await Future.delayed(const Duration(seconds: 2));
-         ispress=false;
-        setState(() {
-          
-        });
-        
+      onPressed: () async {
        
+
+        widget.onPressed();
+
       },
       child: Text(widget.choice),
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all
-        
-        (
-         
-       ispress
+        backgroundColor: MaterialStateProperty.all(
+          BlocProvider.of<AnswerstateCubit>(context).isselect != null
               ? (widget.answerstate ? Colors.green : Colors.red)
               : widget.buttonColor,
-        
         ),
         foregroundColor: MaterialStateProperty.all(Colors.white),
         shape: MaterialStateProperty.all(

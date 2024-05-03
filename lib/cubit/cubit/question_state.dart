@@ -12,4 +12,4 @@ final class QuestionError extends QuestionState {
 
   QuestionError({required this.message});
 }
-final class Questionsucess{}
+final class Questionsucess extends QuestionState{}

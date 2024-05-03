@@ -8,15 +8,16 @@ class AnswerstateCubit extends Cubit<AnswerstateState> {
   AnswerstateCubit() : super(AnswerstateInitial());
   int score = 0;
   int currentque = 0;
-  bool isdone=false;
+  int? isselect = null;
+  bool isdone = false;
   List<questionmodel> qlist = [
     questionmodel(
       question: 'question one',
       choices: [
         {'answer true': true},
         {'answer false': false},
-          {'answer false': false},
-            {'answer false': false},
+        {'answer false': false},
+        {'answer false': false},
       ],
     ),
     questionmodel(
@@ -34,24 +35,28 @@ class AnswerstateCubit extends Cubit<AnswerstateState> {
       ],
     ),
   ];
+void isselectop(int index){
+  isselect=index;
 
+}
+void isselectnull(){
+  isselect=null;
+}
   void trueanswer() {
-
     score++;
     currentque++;
     emit(Answerstatetrue());
-
   }
 
   void falseanswer() {
     currentque++;
     emit(Answerstatefalse());
   }
-  bool isdoneop(){
-    if(qlist.length==currentque){
-     return isdone=true;
+
+  bool isdoneop() {
+    if (qlist.length == currentque) {
+      return isdone = true;
     }
-    return isdone=false;
+    return isdone = false;
   }
 }
-

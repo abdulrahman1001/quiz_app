@@ -3,9 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_app/cubit/cubit/answerstate_cubit.dart';
 import 'package:quiz_app/widget/choicebutton.dart';
 
-class ButtonListView extends StatelessWidget {
+class ButtonListView extends StatefulWidget {
   const ButtonListView({super.key});
 
+  @override
+  State<ButtonListView> createState() => _ButtonListViewState();
+}
+
+class _ButtonListViewState extends State<ButtonListView> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AnswerstateCubit, AnswerstateState>(
@@ -33,20 +38,28 @@ class ButtonListView extends StatelessWidget {
                 child: choicebutton(
                   buttonColor: color!,
                   onPressed: () async{
+                         BlocProvider.of<AnswerstateCubit>(context).isselectop(index);
+                         setState(() {
+                           
+                         });
+                         print(BlocProvider.of<AnswerstateCubit>(context).isselect);
                     if (choiceValue == true) {
-                      
+                 
                         
                           await Future.delayed(const Duration(seconds: 2));
                       BlocProvider.of<AnswerstateCubit>(context).trueanswer();
-                      BlocProvider.of<AnswerstateCubit>(context).isdoneop();
-                    
+           
+                 
                     } else {
                 
                           await Future.delayed(const Duration(seconds: 2));
                       BlocProvider.of<AnswerstateCubit>(context).falseanswer();
-                       BlocProvider.of<AnswerstateCubit>(context).isdoneop();
-                     
+                       
+                        
                     }
+                    BlocProvider.of<AnswerstateCubit>(context).isdoneop();
+                      BlocProvider.of<AnswerstateCubit>(context).isselectnull();
+                     
                   },
                   choice: choiceKey,
              answerstate: choiceValue!,
