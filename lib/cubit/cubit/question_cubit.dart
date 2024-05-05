@@ -12,6 +12,7 @@ class QuestionCubit extends Cubit<QuestionState> {
   QuestionCubit() : super(QuestionInitial());
 
   String generateRandomNumbersString() {
+
     Random random = Random();
     String result = '';
 
@@ -25,7 +26,7 @@ class QuestionCubit extends Cubit<QuestionState> {
 
   CollectionReference exams = FirebaseFirestore.instance.collection('exams');
 
-  Future<void> addquestion() async {
+  Future<void> addquestion(String question ,List <Map<String,bool>> choice) async {
     String id = generateRandomNumbersString(); // Generate a new random number string for each question
 
     // Check if a document with the generated ID already exists
@@ -37,12 +38,12 @@ class QuestionCubit extends Cubit<QuestionState> {
       try {
         await exams.add({
           'exam': {
-            'question': 'question two',
+            'question': question,
             'choices': [
-              {'answer true': true},
-              {'answer false': false},
-              {'answer false': false},
-              {'answer false': false},
+              {choice[0].keys.first:choice[0].values.first },
+              {choice[1].keys.first: choice[1].values.first},
+              {choice[2].keys.first: choice[2].values.first},
+              {choice[3].keys.first: choice[3].values.first},
             ],
             'id': id
           }

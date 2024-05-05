@@ -10,38 +10,17 @@ class AnswerstateCubit extends Cubit<AnswerstateState> {
   int currentque = 0;
   int? isselect = null;
   bool isdone = false;
-  List<questionmodel> qlist = [
-    questionmodel(
-      question: 'question one',
-      choices: [
-        {'answer true': true},
-        {'answer false': false},
-        {'answer false': false},
-        {'answer false': false},
-      ],
-    ),
-    questionmodel(
-      question: 'question two',
-      choices: [
-        {'answer': true},
-        {'answer': false},
-      ],
-    ),
-    questionmodel(
-      question: 'question three',
-      choices: [
-        {'answer': true},
-        {'answer': false},
-      ],
-    ),
-  ];
-void isselectop(int index){
-  isselect=index;
+  List<questionmodel> qlist = [];
+  String question = '';
 
-}
-void isselectnull(){
-  isselect=null;
-}
+  void isselectop(int index) {
+    isselect = index;
+  }
+
+  void isselectnull() {
+    isselect = null;
+  }
+
   void trueanswer() {
     score++;
     currentque++;
@@ -58,5 +37,23 @@ void isselectnull(){
       return isdone = true;
     }
     return isdone = false;
+  }
+
+  addques(List<Map<String, bool>> choices, String question) {
+    qlist.add(questionmodel(
+      choices: choices,
+      question: question,
+    ));
+  }
+
+  addquestion(String value) {
+    question = value;
+    emit(Answerstateadd());
+  }
+
+  nextquesadd() {
+    currentque++;
+
+    emit(Answerstatcurrent());
   }
 }
